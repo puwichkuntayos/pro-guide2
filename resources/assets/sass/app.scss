@@ -1,0 +1,23 @@
+
+// Fonts
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+
+@import '~sweetalert2/src/sweetalert2';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Font Awesome
+@import '~font-awesome/scss/font-awesome';
+
+// Font Awesome
+@import '~flatpickr/dist/flatpickr';
+
+// Main
+// @import 'variables';
+// @import 'datepicker';
+
+@import 'selectize';
+
+@import 'main';
+@import 'invoice';

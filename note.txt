@@ -1,0 +1,50 @@
+php artisan config:cache
+php artisan key:generate
+
+php artisan migrate:refresh --seed
+
+/register
+/route list ดูก่อนไป controller ทุกครั้ง
+
+
+
+ตัวอย่าง การทำ migrations // -> https://laravel.com/docs/5.6/migrations
+ตัวอย่าง bootstrap 4 // -> https://getbootstrap.com/docs/4.3/examples/
+
+
+
+
+
+
+
+
+        เพิ่มแบบ array
+        1. การเก็บข้อมูลในรูปแบบ arry ของ php my admin 
+            1.เก็บarryไว้ในฟิล โดย แปลง arry ให้เป็นสตริง โดยใช้คำสั่ง json_encode (แค่เอามาแสดง)
+            2.แยกtable
+
+        2. การดึงข้อมูลในรูปแบบ arry 
+            1.เก็บarryไว้ในฟิล โดย แปลง  สตริง ให้เป็น arry โดยใช้คำสั่ง json_decode(ข้อมูลในdatabase, true) *ใช้ทำงานต่อ
+            2.join table
+            
+        json_encode
+
+##mailchimp
+https://artisansweb.net/integrate-mailchimp-newsletter-laravel-application/
+
+
+
+
+##send email
+composer require guzzlehttp/guzzle
+## send email
+    composer require guzzlehttp/guzzle
+
+
+    ใช้ เมล์แทบ
+
+การตั้งค่า email
+https://artisansweb.net/integrate-mailchimp-newsletter-laravel-application/
+ 
+
+php artisan make:request ใช้สำหรับ varidate ใช้สำหรับเช็คค่าว่าง
