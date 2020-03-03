@@ -78,7 +78,7 @@ $value = '';
                             {{-- ชื่อ --}}
                             <div class="col-md-3 mb-3">
                                 <label for="first_name" class="md-3">ขื่อ*</label>
-                                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="" value="{{ $data->name  ?? $value }}" {{ $errors->has('first_name') ? ' autofocus' : '' }}>
+                                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="" value="{{ $data->name  ?? old('first_name') }}" {{ $errors->has('first_name') ? ' autofocus' : '' }}>
                                 <!--value="{{ old('first_name') ?? $data->name }}" ใช้สำหรับเรียกค่าก่อนหน้า  -->
                                 <!-- auto autofocus    -->
                                 <div class="">
@@ -94,7 +94,7 @@ $value = '';
                             {{-- นามสกุล --}}
                             <div class="col-md-3 mb-3">
                                 <label for="last_name" class="md-3">นามสกุล*</label>
-                                <input type="text" class="form-control" id="last_name" required name="last_name" value="{{ $data->last_name  ??  $value  }}" {{ $errors->has('last_name') ? ' autofocus' : '' }}>
+                                <input type="text" class="form-control" id="last_name" required name="last_name" value="{{ $data->last_name  ??  old('last_name')  }}" {{ $errors->has('last_name') ? ' autofocus' : '' }}>
                                 <!-- is-invalid ใช้สำหรับเรียกใช้ validate -->
                                 <div class="">
                                     @if ($errors->has('last_name'))
@@ -109,14 +109,14 @@ $value = '';
                             {{-- ชื่อ(ภาษาอังกฤษ) --}}
                             <div class="col-md-3 mb-3">
                                 <label for="first_name_en" class="md-3">ชื่อ(ภาษาอังกฤษ)</label>
-                                <input type="text" class="form-control" name='first_name_en'>
+                                <input type="text" class="form-control" name='first_name_en' value="{{  old('first_name_en')  }}">
                             </div>
                             {{-- end ชื่อ(ภาษาอังกฤษ) --}}
 
                             {{--นามสกุล(ภาษาอังกฤษ)--}}
                             <div class="col-md-3 mb-3">
                                 <label for="last_name_en" class="md-3">นามสกุล(ภาษาอังกฤษ)</label>
-                                <input type="text" class="form-control" name='last_name_en'>
+                                <input type="text" class="form-control" name='last_name_en' value="{{  old('last_name_en')  }}">
                             </div>
                             {{-- นามสกุล(ภาษาอังกฤษ) --}}
                         </div>
@@ -125,14 +125,17 @@ $value = '';
                             {{-- ชื่อเล่น --}}
                             <div class="col-md-3">
                                 <label for="nickname" class="md-3">ชื่อเล่น</label>
-                                <input type="text" class="form-control" name='nickname'>
+                                <input type="text" class="form-control" name='nickname' value="{{  old('nickname')  }}">
                             </div>
                             {{-- end ชื่อเล่น --}}
 
                             {{-- เพศ --}}
                             <div class="col-md-3">
                                 <label for="sex" class="md-3">เพศ</label>
-                                <select class="custom-select" name='sex' id="sex">
+                                <select class="custom-select" name='sex' id="sex" >
+                                  @if(old('sex')){
+                                      <option value="{{(old('sex')}}" selected>{{old('sex')}}</option>
+                                  }
                                     <option value="">กรุณาเลือก</option>
                                     <option value="ชาย">ชาย</option>
                                     <option value="หญิง">หญิง</option>
@@ -151,7 +154,7 @@ $value = '';
                             {{-- email --}}
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <label for="email" class="md-3">Email</label>
-                                <input type="email" class="form-control disabled" disabled name='email' id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $data->email }}">
+                                <input type="email" class="form-control disabled" disabled name='email' id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $data->email ?? old('sex')}}">
                             </div>
                             {{-- end email --}}
 
@@ -161,7 +164,7 @@ $value = '';
                         <div class="row">
                             <div class="col-md-3">
                                 <label for="phone" class="md-3">โทรศัพท์*</label>
-                                <input type="number" class="form-control" id="phone" name="phone" required value="{{ $data->phone  ?? $value }}">
+                                <input type="number" class="form-control" id="phone" name="phone" required value="{{ $data->phone  ?? old('phone') }}">
 
                                 <div class="">
                                     @if ($errors->has('phone'))
@@ -176,7 +179,7 @@ $value = '';
                             {{-- line id --}}
                             <div class="col-md-3">
                                 <label for="line_id" class="md-3">Line ID</label>
-                                <input type="text" class="form-control" name="line_id">
+                                <input type="text" class="form-control" name="line_id" value="{{old('line_id')}}">
                                 <div class="">
                                     @if ($errors->has('line_id'))
 
@@ -215,7 +218,7 @@ $value = '';
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <label for="home" class="md-3">ที่อยู่ตามทะเบียนบ้าน*</label>
-                            <input type="text" class="form-control" name="home" required id="home">
+                            <input type="text" class="form-control" name="home" required id="home" value="{{old('home')}}">
 
                             <div class="">
                                 @if ($errors->has('home'))
@@ -231,7 +234,7 @@ $value = '';
 
                         <div class="col-md-3">
                             <label for="" class="md-3">อำเภอ/เขต*</label>
-                            <input type="text" class="form-control" required name='home_kat'>
+                            <input type="text" class="form-control" required name='home_kat' value="{{old('home_kat')}}">
 
                             <div class="">
                                 @if ($errors->has('home_kat'))
@@ -245,7 +248,7 @@ $value = '';
 
                         <div class="col-md-3">
                             <label for="" class="md-3">จังหวัด*</label>
-                            <input type="text" class="form-control" required name='home_country'>
+                            <input type="text" class="form-control" required name='home_country' value="{{old('home_country')}}">
 
                             <div class="">
                                 @if ($errors->has('home_country'))
@@ -262,7 +265,7 @@ $value = '';
                     <div class="row">
                         <div class="col-md-3">
                             <label for="">ถนน*</label>
-                            <input type="text" class="form-control" required name='home_street'>
+                            <input type="text" class="form-control" required name='home_street' value="{{old('home_street')}}">
 
                             <div class="">
                                 @if ($errors->has('home_street'))
@@ -274,7 +277,7 @@ $value = '';
                         </div>
                         <div class="col-md-3">
                             <label for="">ตำบล/แขวง*</label>
-                            <input type="text" class="form-control" required name='home_dtrict'>
+                            <input type="text" class="form-control" required name='home_dtrict' value="{{old('home_dtrict')}}">
 
                             <div class="">
                                 @if ($errors->has('home_dtrict'))
@@ -286,7 +289,7 @@ $value = '';
                         </div>
                         <div class="col-md-3">
                             <label for="">รหัสไปรษณีย์*</label>
-                            <input type="text" class="form-control" required name='home_zip'>
+                            <input type="text" class="form-control" required name='home_zip' value="{{old('home_zip')}}">
                             <div class="">
                                 @if ($errors->has('home_zip'))
 
@@ -299,6 +302,11 @@ $value = '';
                             <label for="">บ้านที่อาศัยเป็น</label>
                             <select class="custom-select" name='home_accommodation'>
                                 <!-- <option value="0">กรุณาเลือก</option> -->
+                                @if(old('home_accommodation'))
+                                {
+                                    <option value="{{old('home_accommodation')}}" selected>{{old('home_accommodation')}}</option>
+                                }
+                                <option value="อาศัยกับครอบครัว">อาศัยกับครอบครัว</option>
                                 <option value="อาศัยกับครอบครัว">อาศัยกับครอบครัว</option>
                                 <option value="บ้านตัวเอง">บ้านตัวเอง</option>
                                 <option value="บ้านเช่า">บ้านเช่า</option>
@@ -324,7 +332,7 @@ $value = '';
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <label for="">ที่อยู่ปัจจุบัน*</label>
-                            <input type="text" class="form-control" required name='address'>
+                            <input type="text" class="form-control" required name='address' value="{{old('home_zip')}}">
 
                             <div class="">
                                 @if ($errors->has('address'))
@@ -338,7 +346,7 @@ $value = '';
 
                         <div class="col-md-3">
                             <label for="">อำเภอ/เขต*</label>
-                            <input type="text" class="form-control" required name='address_kat'>
+                            <input type="text" class="form-control" required name='address_kat'  value="{{old('address_kat')}}">
 
                             <div class="">
                                 @if ($errors->has('address_kat'))
@@ -352,7 +360,7 @@ $value = '';
 
                         <div class="col-md-3">
                             <label for="">จังหวัด*</label>
-                            <input type="text" class="form-control" required name='address_country'>
+                            <input type="text" class="form-control" required name='address_country'  value="{{old('address_country')}}">
 
                             <div class="">
                                 @if ($errors->has('address_country'))
@@ -369,7 +377,7 @@ $value = '';
                     <div class="row">
                         <div class="col-md-3">
                             <label for="">ถนน*</label>
-                            <input type="text" class="form-control" required name='address_street'>
+                            <input type="text" class="form-control" required name='address_street' value="{{old('address_street')}}">
 
                             <div class="">
                                 @if ($errors->has('address_street'))
@@ -381,7 +389,7 @@ $value = '';
                         </div>
                         <div class="col-md-3">
                             <label for="">ตำบล/แขวง*</label>
-                            <input type="text" class="form-control" required name='address_drict'>
+                            <input type="text" class="form-control" required name='address_drict' value="{{old('address_drict')}}">
 
                             <div class="">
                                 @if ($errors->has('address_drict'))
@@ -393,7 +401,7 @@ $value = '';
                         </div>
                         <div class="col-md-3">
                             <label for="">รหัสไปรษณีย์*</label>
-                            <input type="text" class="form-control" required name='address_zip'>
+                            <input type="text" class="form-control" required name='address_zip' value="{{old('address_zip')}}">
 
                             <div class="">
                                 @if ($errors->has('address_zip'))
@@ -405,8 +413,12 @@ $value = '';
                         </div>
                         <div class="col-md-3">
                             <label for="">บ้านที่อาศัยเป็น</label>
-                            <select class="custom-select" name='address_accommodation'>
+                            <select class="custom-select" name='address_accommodation' value="{{old('address_accommodation')}}">
                                 <!-- <option value="">กรุณาเลือก</option> -->
+                                @if($old('address_accommodation'))
+                                {
+                                    <option value="{{old('address_accommodation')}}" selected>{{old('address_accommodation')}}</option>
+                                }
                                 <option value="อาศัยกับครอบครัว">อาศัยกับครอบครัว</option>
                                 <option value="บ้านตัวเอง">บ้านตัวเอง</option>
                                 <option value="บ้านเช่า">บ้านเช่า</option>
@@ -443,7 +455,7 @@ $value = '';
                     <div class="row">
                         <div class="col-md-3">
                             <label for="">วัน/เดือน/ปีเกิด*</label>
-                            <input type="date" class="form-control" required name='birdthday'>
+                            <input type="date" class="form-control" required name='birdthday' value="{{old('birdthday')}}">
                             <div class="">
                                 @if ($errors->has('birdthday'))
 
@@ -457,6 +469,10 @@ $value = '';
                         <div class="col-lg-2 col-md-2 col-sm-12">
                             <label for="">ปีนักกษัตร</label>
                             <select class="custom-select" name='chainase'>
+
+                              @if(old('chainase')){
+                                  <option value="{{old('chainase')}}" selected>{{old('chainase')}}</option>
+                              }
                                 <option value="">-</option>
                                 <option value="ปีชวด">ปีชวด, ปีหนู</option>
                                 <option value="ปีฉลู">ปีฉลู, ปีวัว</option>
@@ -486,6 +502,9 @@ $value = '';
                         <div class="col-lg-2 col-md-2 col-sm-12">
                             <label for="">ราศี</label>
                             <select class="custom-select" name='zodiac'>
+                              @if(old('chainase')){
+                                  <option value="{{old('zodiac')}}" selected>{{old('zodiac')}}</option>
+                              }
                                 <option value="">-</option>
                                 <option value="ราศีเมษ">ราศีเมษ</option>
                                 <option value="ราศีพฤษก">ราศีพฤษก</option>
@@ -514,7 +533,7 @@ $value = '';
                         {{-- อายุ --}}
                         <div class="col-lg-2 col-md-2 col-sm-12">
                             <label for="">อายุ*</label>
-                            <input type="text" class="form-control" required value="{{ $data->age  ?? $value }}" name='age'>
+                            <input type="text" class="form-control" required value="{{ $data->age  ?? old('age') }}" name='age' >
                             <div class="">
                                 @if ($errors->has('age'))
 
@@ -533,7 +552,7 @@ $value = '';
                             <div class="form-group row">
 
                                 <div class="col-sm-10">
-                                    <input type="" class="form-control" required value="{{ $data->nationality  ?? $value }}" name='nationality'>
+                                    <input type="" class="form-control" required value="{{ $data->nationality  ?? old('nationality') }}" name='nationality' >
                                     <div class="">
                                         @if ($errors->has('nationality'))
 
@@ -559,7 +578,7 @@ $value = '';
                         {{-- เชื้อชาติ --}}
                         <div class="col-md-3 pb-3">
                             <label for="">เชื้อชาติ*</label>
-                            <input type="text" class="form-control" required value="{{ $data->origin  ?? $value }}" name='origin'>
+                            <input type="text" class="form-control" required value="{{ $data->origin  ?? old('origin') }}" name='origin' >
                             <div class="">
                                 @if ($errors->has('origin'))
 
@@ -573,7 +592,7 @@ $value = '';
                         {{-- ศาสนา --}}
                         <div class="col-md-3">
                             <label for="">ศาสนา*</label>
-                            <input type="text" class="form-control" required value="{{ $data->religion  ?? $value }}" name='religion'>
+                            <input type="text" class="form-control" required value="{{ $data->religion  ?? old('religion') }}" name='religion'>
                             <div class="">
                                 @if ($errors->has('religion'))
 
@@ -587,7 +606,7 @@ $value = '';
                         {{-- น้ำหนัก --}}
                         <div class="col-md-3">
                             <label for="">น้ำหนัก*</label>
-                            <input type="text" class="form-control" required value="{{ $data->weight  ?? $value }}" name='weight'>
+                            <input type="text" class="form-control" required value="{{ $data->weight  ?? old('weight') }}" name='weight'>
                             <div class="">
                                 @if ($errors->has('weight'))
 
@@ -601,7 +620,7 @@ $value = '';
                         {{-- ส่วนสูง --}}
                         <div class="col-md-3">
                             <label for="">ส่วนสูง*</label>
-                            <input type="text" class="form-control" required value="{{ $data->hight  ?? $value }}" name='hight'>
+                            <input type="text" class="form-control" required value="{{ $data->hight  ?? old('hight') }}" name='hight'>
                             <div class="">
                                 @if ($errors->has('hight'))
 
@@ -621,7 +640,7 @@ $value = '';
                         {{-- บัตรประชาชนเลขที่ --}}
                         <div class="col-lg-5 col-md-5 col-sm-12">
                             <label for="">บัตรประชาชนเลขที่*</label>
-                            <input type="text" class="form-control" required value="{{ $data->id_card  ?? $value }}" id="id_card" name='id_card'>
+                            <input type="text" class="form-control" required value="{{ $data->id_card  ?? old('id_card') }}" id="id_card" name='id_card'>
                             <div class="">
                                 @if ($errors->has('id_card'))
 
@@ -635,7 +654,7 @@ $value = '';
                         {{-- สถานที่ออกบัตร --}}
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <label for="">สถานที่ออกบัตร*</label>
-                            <input type="text" class="form-control" required value="{{ $data->place  ?? $value }}" name='place'>
+                            <input type="text" class="form-control" required value="{{ $data->place  ?? old('place') }}" name='place'>
                             <div class="">
                                 @if ($errors->has('place'))
 
@@ -649,7 +668,7 @@ $value = '';
                         {{-- บัตรหมดอายุ --}}
                         <div class="col-md-3">
                             <label for="">บัตรหมดอายุ*</label>
-                            <input type="date" class="form-control" required value="{{ $data->expired_card  ?? $value }}" name='expired_card'>
+                            <input type="date" class="form-control" required value="{{ $data->expired_card  ?? old('expired_card') }}" name='expired_card'>
                             <div class="">
                                 @if ($errors->has('expired_card'))
 
@@ -669,7 +688,7 @@ $value = '';
                         {{-- เลขที่พาสปอร์ต --}}
                         <div class="col-lg-5 col-md-5 col-sm-12">
                             <label for="">เลขที่พาสปอร์ต*</label>
-                            <input type="text" class="form-control" required value="{{ $data->passport_no  ?? $value }}" name='passport_no'>
+                            <input type="text" class="form-control" required value="{{ $data->passport_no  ?? old('passport_no') }}" name='passport_no'>
                             <div class="">
                                 @if ($errors->has('passport_no'))
 
@@ -683,7 +702,7 @@ $value = '';
                         {{-- บัตรหมดอายุ --}}
                         <div class="col-md-3">
                             <label for="">บัตรหมดอายุ*</label>
-                            <input type="date" class="form-control" required value="{{ $data->passport_exp  ?? $value }}" name='passport_exp'>
+                            <input type="date" class="form-control" required value="{{ $data->passport_exp  ?? old('passport_exp') }}" name='passport_exp'>
                             <div class="">
                                 @if ($errors->has('passport_exp'))
 
@@ -708,7 +727,7 @@ $value = '';
                         {{-- บัตรผู้เสียภาษี --}}
                         <div class="col-lg-5 col-md-5 col-sm-12">
                             <label for="">บัตรผู้เสียภาษีเลขที่</label>
-                            <input type="text" class="form-control" name='tax_card'>
+                            <input type="text" class="form-control" name='tax_card' value="{{old('tax_card')}}">
                             <div class="">
                                 @if ($errors->has('tax_card'))
 
@@ -722,8 +741,8 @@ $value = '';
                         {{-- บัตรประกันสังคม --}}
                         <div class="col-lg-5 col-md-5 col-sm-12">
                             <label for="">บัตรประกันสังคมเลขที่</label>
-                            <input type="text" class="form-control" name='security_card'>
-                            
+                            <input type="text" class="form-control" name='security_card' value="{{old('security_card')}}">
+
                         </div>
                         {{-- end บัตรประกันสังคม --}}
                         <div class="col-2"></div>
@@ -743,7 +762,7 @@ $value = '';
                         {{-- ได้รับการยกเว้น --}}
                         <div class="col-md-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="soldier" id="gridRadios1" value="ได้รับการยกเว้น" checked>
+                                <input class="form-check-input" type="radio" name="soldier" id="gridRadios1" value="ได้รับการยกเว้น" {{old('soldier')=='ได้รับการยกเว้น' ? checked:checked}} >
                                 <label class="form-check-label" for="gridRadios1">
                                     ได้รับการยกเว้น
                                 </label>
@@ -754,7 +773,7 @@ $value = '';
                         {{-- ปลดเป็นทหารกองหนุน --}}
                         <div class="col-md-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="soldier" id="gridRadios2" value="ปลดเป็นทหารกองหนุน" checked>
+                                <input class="form-check-input" type="radio" name="soldier" id="gridRadios2" value="ปลดเป็นทหารกองหนุน" value="ได้รับการยกเว้น" {{old('soldier')=='ได้รับการยกเว้น' ? checked:''}}>
                                 <label class="form-check-label" for="gridRadios2">
                                     ปลดเป็นทหารกองหนุน
                                 </label>
@@ -765,7 +784,7 @@ $value = '';
                         {{-- ยังไม่ได้รับการเกณฑ์ จะเกณฑ์ในปี --}}
                         <div class="col-md-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="soldier" id="gridRadios3" value="ยังไม่ได้รับการเกณฑ์ จะเกณฑ์ในปี" checked>
+                                <input class="form-check-input" type="radio" name="soldier" id="gridRadios3" value="ยังไม่ได้รับการเกณฑ์ จะเกณฑ์ในปี" {{old('soldier')=='ยังไม่ได้รับการเกณฑ์ จะเกณฑ์ในปี' ? checked:''}}>
                                 <label class="form-check-label" for="gridRadios3">
                                     ยังไม่ได้รับการเกณฑ์ จะเกณฑ์ในปี
                                 </label>
@@ -1222,7 +1241,7 @@ $value = '';
                                 </div>
                             </div>
                             {{-- end สาขาวิชา --}}
-                             
+
                         </div>
                     </div>
 
@@ -1248,14 +1267,14 @@ $value = '';
                                 @endif
                             </div>
 
-                                    
+
                             </div>
                                 </div>
                             </div>
-                           
+
                             {{-- end เริ่มการศึกษา --}}
 
-                       
+
 
 
                         <div class="col-lg-4 col-md-12 col-sm-12">
@@ -1274,13 +1293,13 @@ $value = '';
                                     @endif
                                 </div>
 
-                               
+
                             </div>
                                 </div>
                             </div>
                             {{--end ถึง --}}
-                           
-                        
+
+
                         <div class="col-lg-3 col-md-12 col-sm-12">
 
                             <label>เกรดเฉลี่ย</label>
@@ -1298,7 +1317,7 @@ $value = '';
                                 </div>
                             </div>
                             {{-- end เกรดเฉลี่ย --}}
-                             
+
                         </div>
                         {{-- end col --}}
                     </div>

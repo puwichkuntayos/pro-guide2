@@ -17,6 +17,9 @@ Route::post('/change_password', 'UserController@change_password');
 Route::get('/users/showpassword', 'UserController@showforget');
 Route::post('/users/forgetpassword', 'UserController@Forgetpassword');
 
+
+Route::get('/showpdf', 'PDFController@pdf');
+
 ## หลังบ้าน
 Auth::routes([
     'register' => false,
@@ -186,9 +189,9 @@ Route::group([
         Route::get('/', function () {
                  // dd(Auth::user());
             return redirect('/totalpayments');
-        }); 
+        });
 
-            
+
             Route::resource('/users', 'UserController')->except([
                 'store', 'update', 'destroy'
             ]);
